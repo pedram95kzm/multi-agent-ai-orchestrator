@@ -1,0 +1,59 @@
+.error,
+.banner {
+  padding: 12px 25px;
+  background: #432a25;
+  border-bottom: 1px solid #71473a;
+  color: #f5c5a5;
+}
+.error button {
+  margin-left: 15px;
+  padding: 3px 8px;
+  font-size: 11px;
+}
+.banner {
+  background: #363222;
+}
+.context-alerts {
+  flex-shrink: 0;
+  max-height: 160px;
+  overflow-y: auto;
+}
+.context-alerts button {
+  margin-left: 12px;
+  padding: 5px 10px;
+}
+.path {
+  overflow-wrap: anywhere;
+  color: #91a69a;
+}
+.delete-confirmation {
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #71473a;
+  border-radius: 8px;
+  background: #30231f;
+}
+.delete-confirmation p {
+  margin-bottom: 12px;
+}
+.startup {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+@media (max-width: 1200px) {
+  .app-shell {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+  .workspace-body {
+    grid-template-columns: minmax(0, 1fr) 210px;
+  }
+  .task-connections,
+  .composer,
+  .conversation {
+    padding: 14px;
+  }
+  .chat-url-status {
+    flex-wrap: wrap;
+  }
+}

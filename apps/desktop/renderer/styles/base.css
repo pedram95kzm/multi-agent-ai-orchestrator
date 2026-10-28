@@ -1,0 +1,133 @@
+:root {
+  font-family: "Segoe UI", sans-serif;
+  color: #e3e7e6;
+  background: #111516;
+  font-size: 13px;
+  color-scheme: dark;
+}
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+body {
+  margin: 0;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  color: inherit;
+  background: #242c2e;
+  border: 1px solid #354043;
+  border-radius: 7px;
+  min-height: 42px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+button:hover {
+  background: #334143;
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+button.primary {
+  background: #b9e7ca;
+  color: #10281b;
+  border-color: #b9e7ca;
+  font-weight: 650;
+}
+button.primary:hover:not(:disabled) {
+  background: #d1f5df;
+  border-color: #d1f5df;
+}
+button.primary.send-actor {
+  background: #a9d6f5;
+  color: #102b3e;
+  border-color: #a9d6f5;
+}
+button.primary.send-actor:hover:not(:disabled) {
+  background: #c9e8ff;
+}
+button.danger {
+  color: #f1b3ac;
+}
+input,
+textarea,
+select {
+  background: #151b1d;
+  color: #e6ebe9;
+  border: 1px solid #364043;
+  border-radius: 6px;
+  padding: 9px;
+  width: 100%;
+}
+textarea {
+  resize: vertical;
+  min-height: 85px;
+  line-height: 1.65;
+}
+input:focus,
+textarea:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid #91c8a8;
+  outline-offset: 2px;
+}
+label {
+  display: grid;
+  gap: 8px;
+  margin: 13px 0;
+}
+p {
+  line-height: 1.65;
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1 {
+  font-size: 23px;
+  font-weight: 600;
+  margin-bottom: 0;
+  overflow-wrap: anywhere;
+}
+h2 {
+  font-size: 21px;
+  font-weight: 550;
+}
+h3 {
+  font-size: 14px;
+}
+small,
+time,
+.muted {
+  font-size: 12px;
+  color: #94a6a0;
+}
+pre,
+.complete {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+}
+pre {
+  background: #121819;
+  padding: 15px;
+  border-radius: 7px;
+  max-height: 420px;
+  overflow: auto;
+}
+code {
+  color: #b9e7ca;
+}

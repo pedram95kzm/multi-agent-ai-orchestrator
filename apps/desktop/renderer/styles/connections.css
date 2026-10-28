@@ -1,0 +1,35 @@
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #66716d;
+  margin-right: 7px;
+  flex-shrink: 0;
+}
+.dot.online {
+  background: #a8dfb7;
+  box-shadow: 0 0 0 3px #93caa015;
+}
+.chrome-connection {
+  padding: 13px 16px;
+  border: 1px solid #34443d;
+  border-radius: 9px;
+  background: #19231e;
+}
+.chrome-connection .section-title {
+  margin: 0;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+.chrome-connection details {
+  margin-top: 10px;
+}
+.chrome-connection li {
+  padding: 4px 0;
+}
+.token-label input {
+  font-family: monospace;
+  font-size: 12px;
+  max-width: 720px;
+}

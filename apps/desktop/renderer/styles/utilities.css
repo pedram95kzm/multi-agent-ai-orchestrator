@@ -1,0 +1,19 @@
+summary {
+  cursor: pointer;
+  color: #adc3b7;
+  padding: 7px 0;
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: #93a5a0;
+}
+.inline {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.inline > label {
+  flex: 1;
+}

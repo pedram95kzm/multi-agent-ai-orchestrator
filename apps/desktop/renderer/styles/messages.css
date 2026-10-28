@@ -1,0 +1,90 @@
+.message {
+  border: 1px solid #35413e;
+  border-radius: 9px;
+  background: #1a2123;
+  margin-bottom: 18px;
+}
+.message-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #303d37;
+}
+.message-head time {
+  margin-left: auto;
+}
+.role-icon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #33403b;
+}
+.role-icon.actor {
+  color: #b9e7ca;
+}
+.role-icon.watcher {
+  color: #e4d5b1;
+}
+.response-number {
+  color: #8da399;
+  font-size: 11px;
+}
+.message-body {
+  padding: 16px;
+}
+.summary {
+  border-left: 2px solid #91c8a8;
+  padding-left: 13px;
+  margin-bottom: 14px;
+}
+.summary p {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+  color: #e4f5e9;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.65;
+}
+.summary > .eyebrow {
+  color: #aee6c2;
+  font-weight: 750;
+}
+.message-preview {
+  white-space: pre-wrap;
+}
+.summary-batch {
+  margin-top: 12px;
+}
+.message-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+.message-actions button,
+.text-button {
+  font-size: 13px;
+  padding: 10px 14px;
+}
+.status {
+  font-size: 10px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background: #27312d;
+}
+.status.failed,
+.status.uncertain,
+.warning {
+  color: #f1bd93;
+}
+.questions {
+  border: 1px solid #405347;
+  padding: 14px;
+  margin: 18px 0;
+  border-radius: 8px;
+}

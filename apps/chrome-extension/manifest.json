@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Relay Chrome Connection",
+  "version": "1.1.8",
+  "description": "Connect Relay task chats to tabs in your current signed-in Chrome profile.",
+  "minimum_chrome_version": "120",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApa432NtIGuG+9qxWl33t+cEM7+iwZDfVju3hm6iih8QtwkpxEx6onHDIQqz/+Vm8sWe5oT6EfhxxgydSc3qYSJlM8ecUbkVAGCABSHT90TCbaYkbGqmPZL/7k3wv7AN0bjCWCq/aWVTVIzAT/z1UqWLVUZUPUDMg8+wsAraKVXPSWiICLTvWVc4aDPSAAk3pZxNsLzTWt795+ePl6jS67eI3uSEn2Za9poEYxE8sbyFIRWsMYIh2cHR93otCsHtlFmgP2Tb1yyU1XonxENLGYIRLcsUds///uDwWnTgesQKbuJcq2JJk4nBU6Hl1IEcUbnUYJWi9IpMVVrZSPMUsbQIDAQAB",
+  "permissions": ["tabs", "storage", "alarms", "scripting"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://chat.qwen.ai/*",
+    "https://chat.deepseek.com/*",
+    "https://chat.z.ai/*"
+  ],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Relay Chrome Connection"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src ws://127.0.0.1:*"
+  }
+}

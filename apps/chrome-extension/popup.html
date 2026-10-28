@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Relay Chrome Connection</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h1>Relay ↗</h1>
+    <p>Use the chats and sign-ins in this Chrome profile.</p>
+    <p id="status" role="status">Checking connection…</p>
+    <p id="ready" hidden>
+      Ready. Paste the Actor and Watcher chat URLs in Relay.
+    </p>
+    <button id="change" type="button" hidden>
+      Use a different connection token
+    </button>
+    <form id="pair">
+      <label for="token">Connection token from Relay Settings</label>
+      <p>Paste once to connect automatically. Next time, just open Relay.</p>
+      <input
+        id="token"
+        autocomplete="off"
+        spellcheck="false"
+        minlength="64"
+        maxlength="64"
+        pattern="[a-f0-9]{64}"
+        required
+      />
+      <button>Connect this Chrome profile</button>
+    </form>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+{
+  "name": "relay-orchestrator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local, protocol-driven actor and watcher orchestration",
+  "author": "Relay contributors",
+  "license": "MIT",
+  "main": "dist/electron/main.cjs",
+  "engines": {
+    "node": "^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run format:check && npm run typecheck && npm test && npm run build",
+    "package:win": "npm run check && electron-builder --win nsis portable && node scripts/smoke.mjs --packaged",
+    "start": "node scripts/start.mjs",
+    "test:smoke": "node scripts/smoke.mjs --dev"
+  },
+  "dependencies": {
+    "highlight.js": "^11.12.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.0",
+    "@types/chrome": "^0.3.6",
+    "@types/jsdom": "^30.0.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/ws": "^8.18.2",
+    "electron": "^44.9.3",
+    "electron-builder": "^26.0.12",
+    "esbuild": "^0.25.12",
+    "jsdom": "^30.1.3",
+    "prettier": "3.6.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^5.0.5",
+    "ws": "^8.18.3"
+  },
+  "overrides": {
+    "@electron/get": "^5.1.0",
+    "@electron/asar": "^4.3.1"
+  },
+  "build": {
+    "appId": "local.relay.orchestrator",
+    "productName": "Relay Orchestrator",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/desktop/**",
+      "dist/electron/**",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "dist/chrome-extension",
+        "to": "chrome-extension"
+      },
+      {
+        "from": "agent.md",
+        "to": "agent.md"
+      },
+      {
+        "from": "docs",
+        "to": "docs"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "build/icon.svg",
+      "signExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

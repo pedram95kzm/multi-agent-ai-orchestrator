@@ -1,0 +1,6 @@
+node_modules/
+dist/
+release/
+.local/
+package-lock.json
+agent.md

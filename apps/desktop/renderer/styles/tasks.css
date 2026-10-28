@@ -1,0 +1,33 @@
+.create-task {
+  max-width: 850px;
+  margin-top: 22px;
+}
+.create-task label {
+  margin-bottom: 20px;
+}
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 17px;
+}
+.task-card {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.task-card h3 {
+  font-size: 19px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.task-card > small:last-of-type {
+  margin: 12px 0;
+}
+.task-card .inline {
+  margin-top: auto;
+}
+.task-roles {
+  display: flex;
+  gap: 20px;
+  text-transform: capitalize;
+}

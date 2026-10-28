@@ -1,0 +1,104 @@
+.code-block {
+  margin: 16px 0;
+  border: 1px solid #34464b;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #10171c;
+  white-space: normal;
+  min-width: 0;
+}
+.code-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 13px;
+  background: #1a272b;
+  border-bottom: 1px solid #304149;
+  flex-wrap: wrap;
+}
+.code-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.code-toolbar > span {
+  color: #b8d9d0;
+  font:
+    600 11px Consolas,
+    monospace;
+  letter-spacing: 0.5px;
+  overflow-wrap: anywhere;
+}
+.code-toolbar button {
+  color: #b9e7ca;
+  font-size: 13px;
+  padding: 9px 14px;
+  flex-shrink: 0;
+  background: #233733;
+  border-color: #3c5650;
+}
+.code-toolbar button:hover {
+  background: #315047;
+}
+.code-block pre {
+  margin: 0;
+  padding: 16px;
+  background: transparent;
+  border-radius: 0;
+  white-space: pre;
+  overflow-wrap: normal;
+  tab-size: 4;
+  direction: ltr;
+  text-align: left;
+}
+.code-block code {
+  color: #dce7ed;
+  font:
+    12px/1.8 Consolas,
+    "Cascadia Code",
+    monospace;
+}
+.hljs-comment,
+.hljs-quote {
+  color: #8c9eac;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag {
+  color: #c5a3ff;
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-addition {
+  color: #addcb1;
+}
+.hljs-number,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-variable,
+.hljs-template-variable {
+  color: #efbd8b;
+}
+.hljs-title,
+.hljs-built_in,
+.hljs-type,
+.hljs-section,
+.hljs-name {
+  color: #87c9ff;
+}
+.hljs-attr,
+.hljs-attribute,
+.hljs-property,
+.hljs-selector-attr {
+  color: #8edbd5;
+}
+.hljs-meta,
+.hljs-selector-class {
+  color: #e3cc8d;
+}
+.hljs-deletion {
+  color: #f49caa;
+}
