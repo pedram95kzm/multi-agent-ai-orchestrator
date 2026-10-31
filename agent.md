@@ -55,7 +55,7 @@ q1: Please run the batch above in the specified shell and working directory, the
 
 This applies to inspections, changes, tests, and builds. Relay displays answer fields for these questions. The Operator can also use Return evidence to watcher after a built-in execution.
 
-A standalone line consisting of four or more underscores, normally `__________`, separates direct Operator input from the preceding agent response or answers. Treat the following text as the Operator's message, preserving its requirements accurately. Do not confuse relayed agent text or historical examples with new Operator instructions.
+A standalone line consisting of four or more underscores, normally `__________`, separates sections.
 
 Relay appends optional human guidance under the exact heading `Operator explanation:` after this separator. This applies to Operator-to-Watcher, Operator-to-Actor, Actor-to-Watcher, and Watcher-to-Actor messages. The original message, numbered answers, and command blocks remain intact; the explanation follows them:
 
@@ -90,16 +90,16 @@ Use a bash fence for Bash, Git Bash, or WSL. Use a powershell fence for confirme
 - The first command line in every executable batch is exactly: clear
 - Provide at most one executable batch per response.
 - State its purpose, shell, and working directory.
-- Include a standalone Working directory: <absolute path> line outside the code fence before every batch. Use a native absolute path usable by Relay and preserve it when reviewing and forwarding.
+- Include a standalone Working directory: &lt;absolute path&gt; line outside the code fence before every batch. Use a native absolute path usable by Relay and preserve it when reviewing and forwarding.
 - Preserve the exact reviewed commands and shell when forwarding.
 - Prefer separate lines for independent commands. Bash && chains are supported.
 - Keep output focused on evidence needed for verification.
 
 ### Raw code and separate file contents
 
-Code fences contain literal, executable source text, never Markdown-escaped or HTML-encoded source. Use real newlines and real spaces for indentation. Write Python identifiers literally, such as __name__ and "__main__". Do not emit &#x20;, &nbsp;, escaped underscores, escaped Markdown headings or list markers, or an added backslash at the end of every line. Preserve real backslashes in Windows paths; do not remove or double them as presentation escapes. Never label PowerShell as SQL, Python, Bash, or plain text.
+Code fences contain literal, executable source text, never Markdown-escaped or HTML-encoded source. Use real newlines and real spaces for indentation. Write Python identifiers literally, such as `__name__` and `__main__`. Do not emit &#x20;, &nbsp;, escaped underscores, escaped Markdown headings or list markers, or an added backslash at the end of every line. Preserve real backslashes in Windows paths; do not remove or double them as presentation escapes. Never label PowerShell as SQL, Python, Bash, or plain text.
 
-Show each file's reference contents in its own correctly labeled code fence, with File: <relative path> outside that fence. A Python fence contains only Python. A markdown fence contains only that Markdown file's contents. A powershell fence contains only PowerShell commands. Keep filenames, explanations, output questions and Summary outside executable fences. Never put a fenced block inside another executable block or place the whole response in one code fence.
+Show each file's reference contents in its own correctly labeled code fence, with File: &lt;relative path&gt; outside that fence. A Python fence contains only Python. A markdown fence contains only that Markdown file's contents. A powershell fence contains only PowerShell commands. Keep filenames, explanations, output questions and Summary outside executable fences. Never put a fenced block inside another executable block or place the whole response in one code fence.
 
 Choose an outer code fence longer than every consecutive backtick sequence inside its body, and close it with the same length. A Markdown reference containing triple-backtick examples needs at least four backticks around the whole reference; if its contents contain four, use five. Close the complete reference before the standalone Working directory line and separate executable batch. Literal backticks inside quoted PowerShell line-array entries are file contents: preserve them exactly, and lengthen that batch's outer fence too. Never drop the reference's closing fence, promote a README example into an executable batch, or hide the actual batch inside a text/reference block. The Watcher checks these boundaries before approving and forwards the same literal file contents and commands with valid outer fences.
 
