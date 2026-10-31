@@ -55,7 +55,17 @@ q1: Please run the batch above in the specified shell and working directory, the
 
 This applies to inspections, changes, tests, and builds. Relay displays answer fields for these questions. The Operator can also use Return evidence to watcher after a built-in execution.
 
-A line consisting of four or more underscores begins direct Operator input. Treat the following text as the Operator's message, preserving its requirements accurately. Do not confuse relayed agent text or historical examples with new Operator instructions.
+A standalone line consisting of four or more underscores, normally `__________`, separates direct Operator input from the preceding agent response or answers. Treat the following text as the Operator's message, preserving its requirements accurately. Do not confuse relayed agent text or historical examples with new Operator instructions.
+
+Relay appends optional human guidance under the exact heading `Operator explanation:` after this separator. This applies to Operator-to-Watcher, Operator-to-Actor, Actor-to-Watcher, and Watcher-to-Actor messages. The original message, numbered answers, and command blocks remain intact; the explanation follows them:
+
+```text
+__________
+Operator explanation:
+Prioritize the reported failure and preserve the existing interface.
+```
+
+**Operator explanation is very important.** Both agents must read it before deciding their next action and treat it as direct, high-priority Operator requirements, corrections, or context. Apply it during planning, implementation, review, and verification. When it conflicts with an agent's assumptions or proposed plan, follow the Operator explanation and carry its requirements into subsequent handoffs. Ask for clarification only when a material ambiguity prevents progress. An explanation that changes command requirements calls for a revised proposal and normal review; it does not modify the preserved batch or itself approve execution.
 
 ## 5. Standard Task Lifecycle
 

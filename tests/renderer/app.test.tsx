@@ -91,7 +91,7 @@ it("collapses operator-addressed responses while keeping every answer field visi
     />,
   );
   expect(screen.queryByText(/Critical full instructions/)).toBeNull();
-  expect(container.querySelectorAll("textarea")).toHaveLength(2);
+  expect(container.querySelectorAll("textarea")).toHaveLength(3);
   expect(screen.getByLabelText(/q1/)).toBeTruthy();
   fireEvent.click(screen.getByText("Show complete text"));
   expect(screen.getByText(/Critical full instructions/)).toBeTruthy();

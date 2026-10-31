@@ -46,6 +46,26 @@ describe("roles, delivery, workflow, and exact review", () => {
     expect(outgoing.originalInput).toBe(current.content);
     expect(outgoing.content).toContain("Implement the current task.");
   });
+  it.each(["actor", "watcher"] as const)(
+    "rejects edits to a %s command handoff even when it includes a operator explanation",
+    (role) => {
+      const core = makeCore();
+      const sender = register(core, role);
+      const recipient = register(core, role === "actor" ? "watcher" : "actor");
+      const source = core.receive(
+        sender.id,
+        "proposal",
+        response(1, `${role}->${recipient.role}`, block()),
+      );
+      expect(() =>
+        core.send(
+          recipient.id,
+          `${source.content.replace("clear\npwd", "clear\nls")}\n\n__________\nOperator explanation:\nExtra context`,
+          source.id,
+        ),
+      ).toThrow("Editing a command handoff");
+    },
+  );
   it("deletes a task's messages, selects the newest remaining task, and keeps other task history", () => {
     const c = makeCore();
     c.state.tasks.push(

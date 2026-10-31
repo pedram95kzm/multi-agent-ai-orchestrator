@@ -2,7 +2,11 @@ import { canonicalConversation } from "../shared/conversation";
 import { reviewBatch } from "./batch-review";
 import { handoverRequest } from "./handover";
 import { randomUUID } from "node:crypto";
-import { parseResponse, hasBlockingIssues } from "../protocol/parser";
+import {
+  parseResponse,
+  hasBlockingIssues,
+  operatorExplanationSeparator,
+} from "../protocol/parser";
 import {
   deliveryRulesVersion,
   needsAgentInstructions,
@@ -545,11 +549,14 @@ export class Orchestrator {
         throw new Error(
           "Recipient differs from the protocol header. Ask the sender for a corrected response.",
         );
-      if (source.parsed?.batches.length && input !== source.content)
+      const completeResponse =
+        input === source.content ||
+        input.startsWith(source.content + operatorExplanationSeparator);
+      if (source.parsed?.batches.length && !completeResponse)
         throw new Error(
           "Editing a command handoff would invalidate exact-batch review. Request a revised proposal.",
         );
-      if (input !== source.content)
+      if (!completeResponse)
         throw new Error(
           "The handoff must contain the selected response's complete current text. Select that response again.",
         );

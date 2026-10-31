@@ -10,11 +10,15 @@ import {
 } from "../../../../../packages/shared/outgoing";
 import { hasWatcherSubmission } from "../../../../../packages/shared/task-start";
 import { MessageContent } from "../messages/MessageContent";
+import { OperatorExplanation } from "../../components/OperatorExplanation";
+import { withOperatorExplanation } from "../../../../../packages/protocol/parser";
 export function MessageComposer({
   state,
   agents,
   draft,
   setDraft,
+  explanation,
+  setExplanation,
   sending,
   current,
   requiredReply,
@@ -25,6 +29,8 @@ export function MessageComposer({
   agents: Agent[];
   draft: string;
   setDraft: (draft: string) => void;
+  explanation: string;
+  setExplanation: (explanation: string) => void;
   sending: boolean;
   current?: Agent;
   requiredReply?: Message;
@@ -54,13 +60,22 @@ export function MessageComposer({
           }
         }}
       />
+      <OperatorExplanation value={explanation} onChange={setExplanation} />
       <div className="composer-bottom">
         <details>
           <summary>
             Outgoing message preview · {current?.role ?? "watcher"}
           </summary>
           <MessageContent
-            content={current ? outgoingPayload(state, current, draft) : draft}
+            content={
+              current
+                ? outgoingPayload(
+                    state,
+                    current,
+                    withOperatorExplanation(draft, explanation),
+                  )
+                : withOperatorExplanation(draft, explanation)
+            }
           />
         </details>
         <div className="composer-send-actions">

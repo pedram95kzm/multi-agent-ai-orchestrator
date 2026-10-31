@@ -9,6 +9,7 @@ import type { Perform } from "../../ui";
 import { hasWatcherSubmission } from "../../../../../packages/shared/task-start";
 import { pendingOperatorReply } from "../../../../../packages/shared/operator-replies";
 import { isUnresolvedDelivery } from "../../../../../packages/shared/outgoing";
+import { withOperatorExplanation } from "../../../../../packages/protocol/parser";
 export function useTaskComposer(
   state: Snapshot,
   task: Task,
@@ -25,6 +26,7 @@ export function useTaskComposer(
       : `Task type: ${task.kind}\nOperating system: ${task.operatingSystem ?? "UNKNOWN — ask the operator before proposing commands"}\nExpected outcome and context:\n${task.title}`,
   );
   const [sending, setSending] = useState(false);
+  const [explanation, setExplanation] = useState("");
   const end = useRef<HTMLDivElement>(null);
   const composer = useRef<HTMLTextAreaElement>(null);
   const following = useRef(true);
@@ -52,13 +54,12 @@ export function useTaskComposer(
     )
       return;
     if (message.type === "response") {
-      await perform({
+      return perform({
         type: "send",
         agentId: agent.id,
         content: message.content,
         sourceId: message.id,
       });
-      return;
     }
     setRecipient(agent.id);
     setDraft(message.content);
@@ -85,10 +86,11 @@ export function useTaskComposer(
         await perform({
           type: "send",
           agentId: target.id,
-          content: draft,
+          content: withOperatorExplanation(draft, explanation),
         })
       ) {
         setDraft("");
+        setExplanation("");
         following.current = true;
       }
     } finally {
@@ -105,6 +107,8 @@ export function useTaskComposer(
     setRecipient,
     draft,
     setDraft,
+    explanation,
+    setExplanation,
     sending,
     current,
     requiredReply,

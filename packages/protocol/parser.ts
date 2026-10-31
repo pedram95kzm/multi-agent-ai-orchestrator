@@ -202,6 +202,16 @@ export function operatorPayload(
     ? input
     : `${separator}\n${input}`;
 }
+export const operatorExplanationSeparator =
+  "\n\n__________\nOperator explanation:\n";
+export function withOperatorExplanation(
+  input: string,
+  explanation: string,
+): string {
+  return explanation.trim()
+    ? `${input}${operatorExplanationSeparator}${explanation.trim()}`
+    : input;
+}
 export function formatAnswers(
   questions: { id: string }[],
   answers: Record<string, string>,

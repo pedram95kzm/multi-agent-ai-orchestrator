@@ -6,7 +6,10 @@ import type {
   Run,
   AppState,
 } from "../../../../../packages/shared/types";
-import { formatAnswers } from "../../../../../packages/protocol/parser";
+import {
+  formatAnswers,
+  withOperatorExplanation,
+} from "../../../../../packages/protocol/parser";
 import { copy, time, type Perform } from "../../ui";
 import { MessageContent } from "./MessageContent";
 import { ResponseBatch, BatchActions } from "./ResponseBatch";
@@ -16,6 +19,7 @@ import {
 } from "../../../../../packages/shared/executions";
 import { fencedCodeBlocks } from "../../../../../packages/protocol/fences";
 import { HandoverTransfer } from "./HandoverTransfer";
+import { OperatorExplanation } from "../../components/OperatorExplanation";
 
 export function ResponseView({
   message: m,
@@ -31,7 +35,10 @@ export function ResponseView({
 }: {
   message: Message;
   agents: Agent[];
-  send: (agent: Agent, message: Message) => void | Promise<void>;
+  send: (
+    agent: Agent,
+    message: Message,
+  ) => void | boolean | Promise<void | boolean>;
   perform: Perform;
   batches?: Batch[];
   runs?: Run[];
@@ -42,6 +49,7 @@ export function ResponseView({
 }) {
   const [complete, setComplete] = useState(false);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [explanation, setExplanation] = useState("");
   const [busy, setBusy] = useState(false);
   const agent = agents.find((a) => a.id === m.agentId);
   const codeBlocks = fencedCodeBlocks(m.content);
@@ -297,10 +305,15 @@ export function ResponseView({
                       type: "send",
                       agentId: agent.id,
                       replyToId: m.id,
-                      content: formatAnswers(questions, answers),
+                      content: withOperatorExplanation(
+                        formatAnswers(questions, answers),
+                        explanation,
+                      ),
                     })
-                  )
+                  ) {
                     setAnswers({});
+                    setExplanation("");
+                  }
                 } finally {
                   setBusy(false);
                 }
@@ -321,6 +334,10 @@ export function ResponseView({
                   />
                 </label>
               ))}
+              <OperatorExplanation
+                value={explanation}
+                onChange={setExplanation}
+              />
               <button
                 disabled={
                   busy ||
@@ -341,6 +358,9 @@ export function ResponseView({
               </button>
             </form>
           )}
+        {m.type === "response" && !!destinations.length && (
+          <OperatorExplanation value={explanation} onChange={setExplanation} />
+        )}
         <div className="message-actions">
           <span className={`status ${m.status}`}>{m.status}</span>
           {!(handoverState && isHandover) && (
@@ -368,7 +388,16 @@ export function ResponseView({
                 onClick={async () => {
                   setBusy(true);
                   try {
-                    await send(a, m);
+                    if (
+                      await send(a, {
+                        ...m,
+                        content: withOperatorExplanation(
+                          m.content,
+                          explanation,
+                        ),
+                      })
+                    )
+                      setExplanation("");
                   } finally {
                     setBusy(false);
                   }
